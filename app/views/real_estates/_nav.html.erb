@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <%= link_to "All Listings", real_estates_path, class:"navbar-brand text-light" %>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to "Create A House Listing", new_real_estate_path("House"), class: "nav-link active text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Create A Complex Building Listing", new_real_estate_path("ComplexBuilding"), class: "nav-link active text-light" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Create A Commercial Unit Listing", new_real_estate_path("CommercialUnit"), class: "nav-link active text-light" %>
+        </li>
+      </ul>
+    </div>
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class:"btn btn-outline-success" %>
+  </div>
+</nav>

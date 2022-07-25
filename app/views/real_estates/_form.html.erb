@@ -1,0 +1,85 @@
+<%= form_with model: real_estate do |form| %>
+  <div class="mb-3">
+    <label class="form-label">Upload Property Picture</label>
+    <%= form.file_field :picture, class:"form-control" %>
+    <% real_estate.errors.full_messages_for(:picture).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <%= form.hidden_field :owner, value: current_user.email %>
+  <%= form.hidden_field :type, value: session[:property_type] %>
+  
+  <div class="mb-3">
+    <label class="form-label">Address</label>
+    <%= form.text_area :address, class: "form-control", style:"resize: none" %>
+    <% real_estate.errors.full_messages_for(:address).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Sqmt</label>
+    <%= form.number_field :sqmt, step: 0.01, class: "form-control" %>
+    <% real_estate.errors.full_messages_for(:sqmt).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Price</label>
+    <%= form.number_field :price, step: 0.01, class: "form-control" %>
+    <% real_estate.errors.full_messages_for(:price).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  
+  <% if session[:property_type] == "House" %>
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <%= form.number_field :rooms, step: 1, class: "form-control" %>
+      <% real_estate.errors.full_messages_for(:rooms).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Floors</label>
+      <%= form.number_field :floors, step: 1, class: "form-control" %>
+      <% real_estate.errors.full_messages_for(:floors).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">With Aircondition</label>
+      <%= form.select :air_cond, [true, false], selected: false, class:"form-select" %>
+    </div>
+  <% elsif session[:property_type] == "ComplexBuilding" %>
+    <div class="mb-3">
+      <label class="form-label">Units</label>
+      <%= form.number_field :units, step: 1, class: "form-control" %>
+      <% real_estate.errors.full_messages_for(:units).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  <% elsif session[:property_type] == "CommercialUnit" %>
+    <div class="mb-3">
+      <label class="form-label">Shops</label>
+      <%= form.number_field :shops, step: 1, class: "form-control" %>
+      <% real_estate.errors.full_messages_for(:shops).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Parking</label>
+      <%= form.number_field :parking, step: 1, class: "form-control" %>
+      <% real_estate.errors.full_messages_for(:parking).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  <% end %>
+  
+    <%= form.submit "List Real Estate", class: "btn btn-success btn-lg" %>
+<% end %>

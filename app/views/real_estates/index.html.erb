@@ -1,0 +1,40 @@
+<div class="mx-auto" style="width: 70%;">
+  <% @real_estates.each do |property| %>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <%= image_tag property.picture, class:"rounded float-start", height: "310", width: "290" %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title">$ <%= property.price %></h2>
+            <p class="card-text"><small class="text-muted"><%= property.address %></small></p>
+            
+            <span class="card-text">Size: <%= property.sqmt %> sqmt</span><br>
+
+            <% if property.type == "House" %>
+              <span class="card-text">Property Type: House </span><br>
+              <span class="card-text">Number of rooms: <%= property.rooms %></span><br>
+              <span class="card-text">Number of floors: <%= property.floors %></span><br>
+              <span class="card-text">With aircondition: <%= property.air_cond %></span><br>
+            <% elsif property.type == "ComplexBuilding" %>
+              <span class="card-text">Property Type: Complex Building </span><br>
+              <span class="card-text">Number of units: <%= property.units %></span><br>
+            <% elsif property.type == "CommercialUnit" %>
+              <span class="card-text">Property Type: Commercial Unit </span><br>
+              <span class="card-text">Number of shops: <%= property.shops %></span><br>
+              <span class="card-text">Number of parking: <%= property.parking %></span><br>
+            <% end %>
+            <span class="card-text">Owner: <%= property.owner %></span><br>
+
+            <% if property.owner == current_user.email %>
+              <%= link_to "Edit", edit_real_estate_path(property), class:"btn btn-outline-primary mt-2 mb btn-lg" %>
+            <% else %>
+              <%= link_to "Buy", real_estate_processing_transaction_path(property), class: "btn btn-outline-warning mt-2 mb btn-lg" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+</div>
